@@ -24,6 +24,21 @@ F-Day-01
 - Zod
 - Sonner
 
+# Infrastructure
+
+Frontend
+Next.js 16
+React 19
+Tailwind v4
+Containerization
+Docker
+State Management
+Zustand
+React Query
+Forms
+React Hook Form
+Zod
+
 ---
 
 # Folder Structure
