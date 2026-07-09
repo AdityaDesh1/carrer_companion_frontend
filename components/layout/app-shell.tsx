@@ -1,8 +1,8 @@
 "use client";
 
-import Sidebar from "./sidebar";
-import MobileSidebar from "./top-navbar";
-import TopNavbar from "./top-navbar";
+import Sidebar from "./sidebar/sidebar";
+import MobileSidebar from "./sidebar/mobile-sidebar";
+import TopNavbar from "./navbar/navbar";
 
 interface AppShellProps {
     children: React.ReactNode;
