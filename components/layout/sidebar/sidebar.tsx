@@ -32,13 +32,23 @@ export default function Sidebar() {
                 </div>
 
                 {/* Navigation */}
-                <nav className="flex-1 p-4 space-y-2">
-                    ...
+                <nav className="flex-1 space-y-2 p-4">
+                    {navigation.map((item) => (
+                        <SidebarItem
+                            key={item.href}
+                            item={item}
+                        />
+                    ))}
                 </nav>
 
                 {/* Footer */}
-                <div className="border-t p-4 space-y-2">
-                    ...
+                <div className="space-y-2 border-t p-4">
+                    {bottomNavigation.map((item) => (
+                        <SidebarItem
+                            key={item.href}
+                            item={item}
+                        />
+                    ))}
                 </div>
             </aside>
 
