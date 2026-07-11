@@ -8,20 +8,32 @@ import {
     SheetContent,
 } from "@/components/ui/sheet";
 
-import {
-    navigation,
-    bottomNavigation,
-} from "@/constants/navigation";
-
 import { useSidebarStore } from "@/store/sidebar-store";
+import SidebarNavigation from "./navigation";
+import SidebarFooter from "./footer";
+import { useEffect } from "react";
 
 export default function MobileSidebar() {
-    const isMobileOpen = useSidebarStore(
-        (state) => state.isMobileOpen
-    );
-
     const closeMobile = useSidebarStore(
         (state) => state.closeMobile
+    );
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                closeMobile();
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [closeMobile]);
+
+    const isMobileOpen = useSidebarStore(
+        (state) => state.isMobileOpen
     );
 
     return (
@@ -35,29 +47,24 @@ export default function MobileSidebar() {
         >
             <SheetContent
                 side="left"
-                className="flex w-72 flex-col p-0"
+                className="flex w-72 flex-col p-0 md:hidden"
             >
+                {/* Logo */}
                 <div className="border-b p-4">
-                    <Logo />
+                    <Logo collapsed={false} />
                 </div>
 
-                <nav className="flex-1 space-y-2 p-4">
-                    {navigation.map((item) => (
-                        <SidebarItem
-                            key={item.href}
-                            item={item}
-                        />
-                    ))}
-                </nav>
+                {/* Navigation */}
+                <SidebarNavigation
+                    collapsed={false}
+                    onItemClick={closeMobile}
+                />
 
-                <div className="space-y-2 border-t p-4">
-                    {bottomNavigation.map((item) => (
-                        <SidebarItem
-                            key={item.href}
-                            item={item}
-                        />
-                    ))}
-                </div>
+                {/* Footer */}
+                <SidebarFooter
+                    collapsed={false}
+                    onItemClick={closeMobile}
+                />
             </SheetContent>
         </Sheet>
     );

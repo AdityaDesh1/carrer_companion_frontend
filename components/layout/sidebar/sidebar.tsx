@@ -3,21 +3,17 @@
 import Logo from "./logo";
 import SidebarItem from "./item";
 import SidebarToggle from "./toggle";
+
 import { useSidebarStore } from "@/store/sidebar-store";
 import { cn } from "@/lib/utils";
-
-
-import {
-    navigation,
-    bottomNavigation,
-} from "@/constants/navigation";
-
+import SidebarNavigation from "./navigation";
+import SidebarFooter from "./footer";
 
 export default function Sidebar() {
-
     const isCollapsed = useSidebarStore(
         (state) => state.isCollapsed
     );
+
     return (
         <div className="relative">
             <aside
@@ -28,28 +24,14 @@ export default function Sidebar() {
             >
                 {/* Logo */}
                 <div className="border-b p-4">
-                    <Logo />
+                    <Logo collapsed={isCollapsed} />
                 </div>
 
                 {/* Navigation */}
-                <nav className="flex-1 space-y-2 p-4">
-                    {navigation.map((item) => (
-                        <SidebarItem
-                            key={item.href}
-                            item={item}
-                        />
-                    ))}
-                </nav>
+                <SidebarNavigation collapsed={isCollapsed} />
 
                 {/* Footer */}
-                <div className="space-y-2 border-t p-4">
-                    {bottomNavigation.map((item) => (
-                        <SidebarItem
-                            key={item.href}
-                            item={item}
-                        />
-                    ))}
-                </div>
+                <SidebarFooter collapsed={isCollapsed} />
             </aside>
 
             <SidebarToggle />

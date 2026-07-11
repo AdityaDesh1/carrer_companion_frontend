@@ -1,15 +1,15 @@
 "use client";
 
 import NavbarActions from "./actions";
-// import NavbarToggle from "./navbar-toggle";
+import MobileToggle from "./mobile-toggle";
+import PageTitle from "../shared/page-title";
 
 export default function TopNavbar() {
     return (
         <header className="flex h-16 items-center justify-between border-b bg-white px-6">
-            <div className="flex items-center">
-                <h1 className="text-xl font-semibold text-slate-900">
-                    Dashboard
-                </h1>
+            <div className="flex items-center gap-4">
+                <MobileToggle />
+                <PageTitle />
             </div>
 
             <NavbarActions />

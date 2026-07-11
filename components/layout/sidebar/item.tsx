@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { NavigationItem } from "@/types/navigation";
-import { useSidebarStore } from "@/store/sidebar-store";
 import { cn } from "@/lib/utils";
 
 import {
@@ -15,10 +14,14 @@ import {
 
 interface SidebarItemProps {
     item: NavigationItem;
+    collapsed: boolean;
+    onClick?: () => void;
 }
 
 export default function SidebarItem({
     item,
+    collapsed,
+    onClick,
 }: SidebarItemProps) {
     const pathname = usePathname();
 
@@ -26,19 +29,16 @@ export default function SidebarItem({
 
     const isActive = pathname === item.href;
 
-    const isCollapsed = useSidebarStore(
-        (state) => state.isCollapsed
-    );
-
     return (
         <Tooltip delayDuration={100}>
             <TooltipTrigger asChild>
                 <Link
                     href={item.href}
+                    onClick={onClick}
                     aria-current={isActive ? "page" : undefined}
                     className={cn(
                         "flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-all duration-300",
-                        isCollapsed ? "justify-center" : "gap-3",
+                        collapsed ? "justify-center" : "gap-3",
                         isActive
                             ? "bg-slate-900 text-white shadow-sm"
                             : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
@@ -49,7 +49,7 @@ export default function SidebarItem({
                     <span
                         className={cn(
                             "overflow-hidden whitespace-nowrap transition-all duration-300",
-                            isCollapsed
+                            collapsed
                                 ? "max-w-0 opacity-0"
                                 : "max-w-[200px] opacity-100"
                         )}
@@ -59,7 +59,7 @@ export default function SidebarItem({
                 </Link>
             </TooltipTrigger>
 
-            {isCollapsed && (
+            {collapsed && (
                 <TooltipContent side="right">
                     <p>{item.title}</p>
                 </TooltipContent>

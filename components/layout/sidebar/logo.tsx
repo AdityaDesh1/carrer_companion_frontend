@@ -2,19 +2,22 @@
 
 import Link from "next/link";
 
-import { useSidebarStore } from "@/store/sidebar-store";
 import { cn } from "@/lib/utils";
 
-export default function Logo() {
-    const isCollapsed = useSidebarStore(
-        (state) => state.isCollapsed
-    );
+interface LogoProps {
+    collapsed: boolean;
+}
 
+export default function Logo({
+    collapsed,
+}: LogoProps) {
     return (
         <Link
             href="/dashboard"
-            className={`flex items-center ${isCollapsed ? "justify-center" : "gap-3"
-                }`}
+            className={cn(
+                "flex items-center",
+                collapsed ? "justify-center" : "gap-3"
+            )}
         >
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-900 font-bold text-white">
                 CC
@@ -23,7 +26,7 @@ export default function Logo() {
             <div
                 className={cn(
                     "overflow-hidden whitespace-nowrap transition-all duration-300",
-                    isCollapsed
+                    collapsed
                         ? "w-0 opacity-0"
                         : "w-auto opacity-100"
                 )}
