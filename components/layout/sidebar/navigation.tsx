@@ -14,7 +14,7 @@ export default function SidebarNavigation({
     onItemClick,
 }: SidebarNavigationProps) {
     return (
-        <nav className="flex-1 space-y-2 p-4">
+        <nav className="space-y-2 p-4">
             {navigation.map((item) => (
                 <SidebarItem
                     key={item.href}

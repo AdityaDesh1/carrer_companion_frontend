@@ -28,7 +28,9 @@ export default function Sidebar() {
                 </div>
 
                 {/* Navigation */}
-                <SidebarNavigation collapsed={isCollapsed} />
+                <div className="flex-1 overflow-y-auto">
+                    <SidebarNavigation collapsed={isCollapsed} />
+                </div>
 
                 {/* Footer */}
                 <SidebarFooter collapsed={isCollapsed} />

@@ -1,22 +1,56 @@
 "use client";
 
-import { useAuthStore } from "@/store/auth-store";
+import {
+    BookOpen,
+    BriefcaseBusiness,
+    FolderKanban,
+    MessagesSquare,
+} from "lucide-react";
+
+import {
+    DashboardHeader,
+    EmptyState,
+    QuickActions,
+    StatCard,
+} from "@/components/dashboard";
 
 export default function DashboardPage() {
-    const user = useAuthStore((state) => state.user);
-
     return (
-        <div className="space-y-4">
-            <h1 className="text-3xl font-bold">
-                Dashboard
-            </h1>
+        <div className="space-y-8">
+            <DashboardHeader />
 
-            <p className="text-slate-600">
-                Welcome back,{" "}
-                <span className="font-semibold">
-                    {user?.name}
-                </span>
-            </p>
+            <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+                <StatCard
+                    title="Projects"
+                    value={0}
+                    description="Total Projects"
+                    icon={FolderKanban}
+                />
+
+                <StatCard
+                    title="Applications"
+                    value={0}
+                    description="Total Applications"
+                    icon={BriefcaseBusiness}
+                />
+
+                <StatCard
+                    title="Interviews"
+                    value={0}
+                    description="Upcoming Interviews"
+                    icon={MessagesSquare}
+                />
+
+                <StatCard
+                    title="Resources"
+                    value={0}
+                    description="Saved Resources"
+                    icon={BookOpen}
+                />
+            </section>
+
+            <QuickActions />
+            <EmptyState />
         </div>
     );
 }
