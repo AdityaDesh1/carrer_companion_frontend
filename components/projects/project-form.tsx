@@ -1,7 +1,11 @@
 "use client";
 
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { toast } from "sonner";
 
 import {
     projectSchema,
@@ -11,41 +15,93 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-
 import { useCreateProject } from "@/hooks/projects/use-create-project";
+import { useUpdateProject } from "@/hooks/projects/use-update-project";
 
-export default function ProjectForm() {
+interface ProjectFormProps {
+    mode?: "create" | "edit";
+    projectId?: string;
+    defaultValues?: ProjectFormValues;
+}
+
+export default function ProjectForm({
+    mode = "create",
+    projectId,
+    defaultValues,
+}: ProjectFormProps) {
+    const router = useRouter();
+    const isEditMode = mode === "edit";
+
+    const createProject = useCreateProject();
+    const updateProject = useUpdateProject(projectId ?? "");
+
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm<ProjectFormValues>({
         resolver: zodResolver(projectSchema),
-        defaultValues: {
+        defaultValues: defaultValues ?? {
             title: "",
             description: "",
         },
     });
 
-    const onSubmit = async (
-        data: ProjectFormValues
-    ) => {
+    useEffect(() => {
+        if (defaultValues) {
+            reset(defaultValues);
+        }
+    }, [defaultValues, reset]);
+
+    const isPending = isEditMode
+        ? updateProject.isPending
+        : createProject.isPending;
+
+    const handleCancel = () => {
+        if (isEditMode && projectId) {
+            router.push(`/projects/${projectId}`);
+            return;
+        }
+
+        router.push("/projects");
+    };
+
+    const onSubmit = async (data: ProjectFormValues) => {
         try {
+            if (isEditMode) {
+                if (!projectId) {
+                    toast.error("Project ID is missing.");
+                    return;
+                }
+
+                await updateProject.mutateAsync(data);
+
+                toast.success("Project updated successfully.");
+
+                router.push(`/projects/${projectId}`);
+                return;
+            }
+
             await createProject.mutateAsync(data);
 
             toast.success("Project created successfully.");
 
             router.push("/projects");
         } catch (error) {
-            toast.error("Failed to create project.");
+            if (axios.isAxiosError(error)) {
+                toast.error(
+                    error.response?.data?.message ??
+                        `Failed to ${isEditMode ? "update" : "create"} project.`
+                );
+                return;
+            }
+
+            toast.error(
+                `Failed to ${isEditMode ? "update" : "create"} project.`
+            );
         }
     };
-
-    const router = useRouter();
-
-    const createProject = useCreateProject();
 
     return (
         <form
@@ -87,21 +143,27 @@ export default function ProjectForm() {
                 )}
             </div>
 
-            <div className="flex justify-end gap-3">
+            <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
                 <Button
                     type="button"
                     variant="outline"
+                    onClick={handleCancel}
+                    disabled={isPending}
                 >
                     Cancel
                 </Button>
 
                 <Button
                     type="submit"
-                    disabled={createProject.isPending}
+                    disabled={isPending}
                 >
-                    {createProject.isPending
-                        ? "Creating..."
-                        : "Create Project"}
+                    {isPending
+                        ? isEditMode
+                            ? "Saving..."
+                            : "Creating..."
+                        : isEditMode
+                          ? "Save Changes"
+                          : "Create Project"}
                 </Button>
             </div>
         </form>
