@@ -8,8 +8,7 @@ import { CreateInterviewInput } from "@/types/interview";
 import { fromDatetimeLocalValue } from "@/lib/format-datetime";
 
 function toCreatePayload(data: InterviewFormValues): CreateInterviewInput {
-    const { status: _status, scheduledAt, company, role, round, notes, feedback } =
-        data;
+    const { scheduledAt, company, role, round, notes, feedback } = data;
 
     return {
         company,

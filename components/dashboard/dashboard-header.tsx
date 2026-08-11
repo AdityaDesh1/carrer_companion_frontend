@@ -12,7 +12,7 @@ export default function DashboardHeader() {
             </h1>
 
             <p className="text-slate-600">
-                Let's make today productive.
+                Let&apos;s make today productive.
             </p>
         </section>
     );
