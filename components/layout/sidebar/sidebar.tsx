@@ -1,7 +1,6 @@
 "use client";
 
 import Logo from "./logo";
-import SidebarItem from "./item";
 import SidebarToggle from "./toggle";
 
 import { useSidebarStore } from "@/store/sidebar-store";
