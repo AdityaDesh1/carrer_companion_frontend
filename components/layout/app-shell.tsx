@@ -12,7 +12,7 @@ export default function AppShell({
     children,
 }: AppShellProps) {
     return (
-        <div className="flex min-h-screen bg-slate-100">
+        <div className="flex h-screen overflow-hidden bg-slate-100">
             {/* Desktop & Tablet Sidebar */}
             <div className="hidden md:block">
                 <Sidebar />
@@ -22,10 +22,10 @@ export default function AppShell({
             <MobileSidebar />
 
             {/* Main Content */}
-            <div className="flex min-w-0 flex-1 flex-col">
+            <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
                 <TopNavbar />
 
-                <main className="flex-1 overflow-auto p-6">
+                <main className="flex-1 overflow-y-auto p-6">
                     {children}
                 </main>
             </div>
