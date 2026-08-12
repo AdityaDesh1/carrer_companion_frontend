@@ -7,6 +7,7 @@ import {
     MessagesSquare,
     FileText,
     BookOpen,
+    NotebookPen,
     User,
     Settings,
 } from "lucide-react";
@@ -41,6 +42,11 @@ export const navigation: NavigationItem[] = [
         title: "Resumes",
         href: "/resumes",
         icon: FileText,
+    },
+    {
+        title: "Notes",
+        href: "/notes",
+        icon: NotebookPen,
     },
 ];
 
