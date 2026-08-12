@@ -6,6 +6,7 @@ import {
     FileText,
     FolderKanban,
     MessagesSquare,
+    NotebookPen,
 } from "lucide-react";
 
 import {
@@ -17,7 +18,7 @@ import {
 
 const actions = [
     {
-        title: "New Project",
+        title: "Add Project",
         href: "/projects/new",
         icon: FolderKanban,
     },
@@ -27,7 +28,7 @@ const actions = [
         icon: BriefcaseBusiness,
     },
     {
-        title: "Schedule Interview",
+        title: "Add Interview",
         href: "/interviews/new",
         icon: MessagesSquare,
     },
@@ -35,6 +36,11 @@ const actions = [
         title: "Add Resume",
         href: "/resumes/new",
         icon: FileText,
+    },
+    {
+        title: "Add Note",
+        href: "/notes/new",
+        icon: NotebookPen,
     },
 ];
 
@@ -45,7 +51,7 @@ export default function QuickActions() {
                 <CardTitle>Quick Actions</CardTitle>
             </CardHeader>
 
-            <CardContent className="grid gap-3 sm:grid-cols-2">
+            <CardContent className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {actions.map((action) => {
                     const Icon = action.icon;
 

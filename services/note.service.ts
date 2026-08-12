@@ -1,13 +1,16 @@
 import { api } from "@/lib/axios";
 import {
     CreateNoteDto,
+    GetNotesParams,
     Note,
     UpdateNoteDto,
 } from "@/types/note.types";
 
 export const noteService = {
-    async getNotes() {
-        const response = await api.get<Note[]>("/notes");
+    async getNotes(params?: GetNotesParams) {
+        const response = await api.get<Note[]>("/notes", {
+            params,
+        });
         return response.data;
     },
 

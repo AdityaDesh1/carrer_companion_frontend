@@ -9,6 +9,11 @@ export interface Project {
     updatedAt: string;
 }
 
+export interface GetProjectsParams {
+    page?: number;
+    limit?: number;
+}
+
 export type ProjectFormValues = z.infer<
     typeof projectSchema
 >;

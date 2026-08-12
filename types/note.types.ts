@@ -7,6 +7,11 @@ export interface Note {
     updatedAt: string;
 }
 
+export interface GetNotesParams {
+    page?: number;
+    limit?: number;
+}
+
 export interface CreateNoteDto {
     title: string;
     content: string;

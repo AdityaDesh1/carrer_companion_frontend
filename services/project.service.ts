@@ -1,9 +1,15 @@
 import { api } from "@/lib/axios";
-import { Project, ProjectFormValues } from "@/types/project";
+import {
+    GetProjectsParams,
+    Project,
+    ProjectFormValues,
+} from "@/types/project";
 
 export const projectService = {
-    async getProjects() {
-        const response = await api.get<Project[]>("/projects");
+    async getProjects(params?: GetProjectsParams) {
+        const response = await api.get<Project[]>("/projects", {
+            params,
+        });
 
         return response.data;
     },
