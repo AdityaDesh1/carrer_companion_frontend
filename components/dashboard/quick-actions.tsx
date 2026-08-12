@@ -32,8 +32,8 @@ const actions = [
         icon: MessagesSquare,
     },
     {
-        title: "Upload Resume",
-        href: "/resume/new",
+        title: "Add Resume",
+        href: "/resumes/new",
         icon: FileText,
     },
 ];
