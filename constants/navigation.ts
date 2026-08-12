@@ -5,6 +5,7 @@ import {
     FolderKanban,
     BriefcaseBusiness,
     MessagesSquare,
+    CircleHelp,
     FileText,
     BookOpen,
     NotebookPen,
@@ -32,6 +33,11 @@ export const navigation: NavigationItem[] = [
         title: "Interviews",
         href: "/interviews",
         icon: MessagesSquare,
+    },
+    {
+        title: "Interview Questions",
+        href: "/interview-questions",
+        icon: CircleHelp,
     },
     {
         title: "Resources",
