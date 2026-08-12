@@ -1,5 +1,8 @@
 "use client";
 
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 import { ApplicationStats } from "@/types/dashboard.types";
 
@@ -53,12 +56,22 @@ export default function ApplicationPipeline({
 }: ApplicationPipelineProps) {
     return (
         <Card>
-            <CardHeader>
-                <CardTitle>Application Pipeline</CardTitle>
+            <CardHeader className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                    <CardTitle>Application Pipeline</CardTitle>
 
-                <CardDescription>
-                    Overview of your applications by status
-                </CardDescription>
+                    <CardDescription>
+                        Overview of your applications by status
+                    </CardDescription>
+                </div>
+
+                <Link
+                    href="/applications"
+                    className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                >
+                    View Applications
+                    <ArrowRight className="h-4 w-4" />
+                </Link>
             </CardHeader>
 
             <CardContent>

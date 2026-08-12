@@ -32,7 +32,7 @@ export default function InterviewQuestionNotFoundState() {
 
                 <Button asChild>
                     <Link href="/interview-questions">
-                        Back to Questions
+                        Back to Interview Questions
                     </Link>
                 </Button>
             </CardContent>

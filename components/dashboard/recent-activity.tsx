@@ -41,7 +41,7 @@ function sortRecent<T>(
 export default function RecentActivity() {
     const applicationsQuery = useApplications(RECENT_QUERY_PARAMS);
     const projectsQuery = useProjects(RECENT_QUERY_PARAMS);
-    const notesQuery = useNotes(RECENT_QUERY_PARAMS);
+    const notesQuery = useNotes();
     const interviewsQuery = useInterviews(RECENT_QUERY_PARAMS);
 
     const recentApplications = sortRecent<Application>(

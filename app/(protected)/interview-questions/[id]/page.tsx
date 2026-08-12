@@ -42,7 +42,7 @@ export default function InterviewQuestionDetailsPage() {
                 >
                     <Link href="/interview-questions">
                         <ArrowLeft className="h-4 w-4" />
-                        Back to Questions
+                        Back to Interview Questions
                     </Link>
                 </Button>
 
