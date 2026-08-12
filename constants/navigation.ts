@@ -38,8 +38,8 @@ export const navigation: NavigationItem[] = [
         icon: BookOpen,
     },
     {
-        title: "Resume",
-        href: "/resume",
+        title: "Resumes",
+        href: "/resumes",
         icon: FileText,
     },
 ];
