@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Career Companion Frontend
 
-## Getting Started
+## Overview
 
-First, run the development server:
+Career Companion is a career management platform for tracking projects, job applications, interviews, resumes, notes, resources, and interview preparation. This repository contains the Next.js frontend for the MVP.
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS 4
+- **UI:** shadcn/ui, Radix UI
+- **State:** Zustand (auth), TanStack React Query (server state)
+- **Forms:** React Hook Form + Zod
+- **HTTP:** Axios
+
+## Features
+
+- User authentication (login and register)
+- Dashboard with summary stats and recent activity
+- Projects, applications, interviews, resources, resumes, and notes management
+- Interview questions module
+- Responsive sidebar navigation with mobile drawer
+- Loading, error, and empty states across modules
+- CRUD flows for all MVP modules
+
+## Requirements
+
+- Node.js 20+
+- npm
+- Running Career Companion backend API
+
+## Local Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create environment file:
+
+```bash
+cp .env.example .env.local
+```
+
+3. Set the API URL in `.env.local`:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
+```
+
+4. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app runs at [http://localhost:3001](http://localhost:3001) by default.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Description | Example |
+| --- | --- | --- |
+| `NEXT_PUBLIC_API_URL` | Backend API base URL (include `/api`) | `http://localhost:3000/api` |
 
-## Learn More
+For production, set `NEXT_PUBLIC_API_URL` to your deployed backend URL, for example:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+NEXT_PUBLIC_API_URL=https://your-backend.example.com/api
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Do not commit `.env.local` or any file containing real secrets.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Development
 
-## Deploy on Vercel
+```bash
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Lint
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+```
+
+## Production Build
+
+```bash
+npm run build
+npm start
+```
+
+Set `NEXT_PUBLIC_API_URL` in your deployment environment before building or running the production server.
+
+## Project Structure
+
+```text
+app/
+  (auth)/          # Login and register pages
+  (protected)/     # Authenticated app routes
+components/        # UI and feature components
+constants/         # Navigation and shared constants
+hooks/             # React Query hooks and form hooks
+lib/               # Axios client, utilities, query client
+providers/         # Auth provider
+schemas/           # Zod validation schemas
+services/          # API service layer
+store/             # Zustand stores
+types/             # TypeScript types
+```
+
+## Backend Requirement
+
+This frontend expects a compatible Career Companion backend API. All requests are sent through the shared Axios instance in `lib/axios.ts` using `NEXT_PUBLIC_API_URL`.
+
+Authentication endpoints:
+
+- `POST /auth/login`
+- `POST /auth/register`
+
+Protected module endpoints are consumed via the service files in `services/`.
+
+## Current MVP Modules
+
+- Authentication
+- Dashboard
+- Projects
+- Applications
+- Interviews
+- Resources
+- Resumes
+- Notes
+- Interview Questions
+- Responsive navigation

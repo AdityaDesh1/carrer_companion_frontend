@@ -40,7 +40,11 @@ export default function UserDropdown() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <button className="rounded-full outline-none ring-offset-background transition focus-visible:ring-2 focus-visible:ring-ring">
+                <button
+                    type="button"
+                    aria-label="Open user menu"
+                    className="rounded-full outline-none ring-offset-background transition focus-visible:ring-2 focus-visible:ring-ring"
+                >
                     <Avatar>
                         <AvatarFallback>
                             {initials}

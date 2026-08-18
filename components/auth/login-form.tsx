@@ -93,6 +93,11 @@ export default function LoginForm() {
                             <button
                                 type="button"
                                 onClick={() => setShowPassword((prev) => !prev)}
+                                aria-label={
+                                    showPassword
+                                        ? "Hide password"
+                                        : "Show password"
+                                }
                                 className="absolute inset-y-0 right-4 flex items-center text-slate-500 hover:text-slate-700"
                             >
                                 {showPassword ? (

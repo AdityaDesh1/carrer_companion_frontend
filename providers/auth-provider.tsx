@@ -13,12 +13,19 @@ export function AuthProvider({
 
     useEffect(() => {
         const token = localStorage.getItem("accessToken");
-        const user = localStorage.getItem("user");
+        const storedUser = localStorage.getItem("user");
 
-        restore(
-            token,
-            user ? (JSON.parse(user) as AuthUser) : null
-        );
+        let user: AuthUser | null = null;
+
+        if (storedUser) {
+            try {
+                user = JSON.parse(storedUser) as AuthUser;
+            } catch {
+                localStorage.removeItem("user");
+            }
+        }
+
+        restore(token, user);
     }, [restore]);
 
     return <>{children}</>;

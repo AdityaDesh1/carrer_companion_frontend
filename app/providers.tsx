@@ -1,9 +1,10 @@
 "use client";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { queryClient } from "@/lib/query-client";
 import { AuthProvider } from "@/providers/auth-provider";
 
 export function Providers({
@@ -11,12 +12,10 @@ export function Providers({
 }: {
     children: React.ReactNode;
 }) {
-    const [queryClient] = useState(
-        () => new QueryClient()
-    );
+    const [client] = useState(() => queryClient);
 
     return (
-        <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={client}>
             <TooltipProvider delayDuration={100}>
                 <AuthProvider>
                     {children}
