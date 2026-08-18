@@ -39,24 +39,29 @@ export default function LoginForm() {
                 {/* Form */}
                 <form
                     onSubmit={handleSubmit(onSubmit)}
+                    noValidate
                     className="space-y-6"
                 >
                     {/* Email */}
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium">
+                        <label htmlFor="email" className="text-sm font-medium">
                             Email
                         </label>
 
                         <Input
+                            id="email"
                             type="email"
                             placeholder="Enter your email"
                             className="h-12 rounded-2xl"
+                            autoComplete="email"
+                            aria-invalid={!!errors.email}
+                            aria-describedby={errors.email ? "email-error" : undefined}
                             {...register("email")}
                         />
 
                         {errors.email && (
-                            <p className="text-sm text-red-500">
+                            <p id="email-error" className="text-sm text-red-500">
                                 {errors.email.message}
                             </p>
                         )}
@@ -67,15 +72,21 @@ export default function LoginForm() {
                     {/* Password */}
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium">
+                        <label htmlFor="password" className="text-sm font-medium">
                             Password
                         </label>
 
                         <div className="relative">
                             <Input
+                                id="password"
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Enter your password"
                                 className="h-12 rounded-2xl pr-12"
+                                autoComplete="current-password"
+                                aria-invalid={!!errors.password}
+                                aria-describedby={
+                                    errors.password ? "password-error" : undefined
+                                }
                                 {...register("password")}
                             />
 
@@ -93,7 +104,7 @@ export default function LoginForm() {
                         </div>
 
                         {errors.password && (
-                            <p className="text-sm text-red-500">
+                            <p id="password-error" className="text-sm text-red-500">
                                 {errors.password.message}
                             </p>
                         )}
